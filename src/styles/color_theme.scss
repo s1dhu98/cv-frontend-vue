@@ -43,7 +43,7 @@
     --node: green;
     --stroke: black;
     --fill: white;
-    --hover-and-sel: rgba(0, 123, 255, 0.35);
+    --hover-and-sel: rgba(255, 193, 7, 0.22);
     --wire-draw: #000;
     --wire-cnt: green;
     --wire-pow: Lime;
@@ -269,11 +269,12 @@
 }
 
 .moduleProperty input,
-.moduleProperty textarea {
+.moduleProperty textarea,
+.moduleProperty .objectPropertyAttribute {
     /* make input fields stand out from the dark properties background */
-    background-color: #f6f6f6;
+    background-color: #ffffff;
     color: var(--text-dark);
-    border: 1px solid rgba(0,0,0,0.12) !important;
+    border: 1px solid rgba(0,0,0,0.18) !important;
     padding: 6px 8px;
     border-radius: 4px;
 }
@@ -291,11 +292,12 @@
 
 .moduleProperty input:focus,
 .moduleProperty select:focus,
-.moduleProperty textarea:focus {
+.moduleProperty textarea:focus,
+.moduleProperty .objectPropertyAttribute:focus {
     color: var(--text-dark);
-    border-color: var(--bg-toggle-btn-primary) !important;
+    border-color: rgba(255,193,7,0.9) !important;
     background-color: #ffffff;
-    box-shadow: 0 0 0 4px rgba(66,185,131,0.08);
+    box-shadow: 0 0 0 5px rgba(255,193,7,0.12);
     outline: none;
 }
 
