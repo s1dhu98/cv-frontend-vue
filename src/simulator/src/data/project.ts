@@ -16,7 +16,6 @@ import { confirmOption } from '#/components/helpers/confirmComponent/ConfirmComp
  * @category data
  */
 export async function recoverProject() {
-<<<<<<< HEAD
     const recoverData = localStorage.getItem("recover");
 
     if (!recoverData) {
@@ -70,23 +69,7 @@ export async function recoverProject() {
         showError("Failed to load recovery project");
         console.error("Load error:", loadError);
     }
-=======
-  const recoverData = localStorage.getItem("recover");
 
-  if (!recoverData) {
-    showError("No recover project found");
-    return;
-  }
-
-  let data: any;
-  try {
-    data = JSON.parse(recoverData);
-  } catch (parseError) {
-    showError("Recovery data is corrupted and cannot be parsed");
-    localStorage.removeItem("recover");
-    console.error("Parse error:", parseError);
-    return;
-  }
 
   if (!data || typeof data !== "object") {
     showError("Recovery data is invalid");

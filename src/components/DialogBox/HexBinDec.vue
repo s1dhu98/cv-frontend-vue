@@ -127,7 +127,7 @@ function converter(e: KeyboardEvent) {
     const regexBinary = /[^01]/g
     const regexOctal = /[^0-7]/g
     const regexDecimal = /[^0-9]/g
-    const regexHex = /[^0-9A-Fa-f]/g
+    const regexHex = /[^0-9A-Fa-fx]/g
 
     switch (target.id) {
         case 'decimalInput':
@@ -148,7 +148,12 @@ function converter(e: KeyboardEvent) {
             break
         case 'hexInput':
             value = value.replace(regexHex, '')
-            hexConverter(value)
+            // Handle '0x' prefix like binary
+            let hexVal = value
+            if (hexVal.slice(0, 2).toLowerCase() === '0x') {
+                hexVal = hexVal.slice(2)
+            }
+            hexConverter(hexVal)
             break
     }
 
@@ -165,50 +170,7 @@ function convertToBCD(value: number) {
 }
 
 function setBaseValues(x: number) {
-    if (isNaN(x)) {
-        return
-    }
-    inputArr.value.binaryInput.val = '0b' + x.toString(2)
-    inputArr.value.bcdInput.val = convertToBCD(x)
-    inputArr.value.octalInput.val = '0' + x.toString(8)
-    inputArr.value.hexInput.val = '0x' + x.toString(16)
-    inputArr.value.decimalInput.val = x.toString(10)
-}
-
-function decimalConverter(input: string) {
-    const x = parseInt(input, 10)
-    setBaseValues(x)
-}
-
-function binaryConverter(input: string) {
-    let x
-    if (input.slice(0, 2) == '0b') {
-        x = parseInt(input.slice(2), 2)
-    } else {
-        x = parseInt(input, 2)
-    }
-    setBaseValues(x)
-}
-
-function bcdConverter(input: string) {
-    let num = 0
-    while (input.length % 4 !== 0) {
-        input = '0' + input
-    }
-    let i = 0
-    while (i < input.length / 4) {
-        if (parseInt(input.slice(4 * i, 4 * (i + 1)), 2) < 10) {
-            num = num * 10 + parseInt(input.slice(4 * i, 4 * (i + 1)), 2)
-        } else {
-            return setBaseValues(NaN)
-        }
-        i++
-    }
-    return setBaseValues(num)
-}
-
-function octalConverter(input: string) {
-    let x = parseInt(input, 8)
+      </v-dialog>
     setBaseValues(x)
 }
 
